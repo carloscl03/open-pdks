@@ -1,0 +1,54 @@
+# Rule tests for the sky130 magic tech file.
+#
+# Each line maps a rule of rules.csv (parsed from the SkyWater design rule
+# manual) to a test that run_magic_rule_tests.py can draw.  The value of
+# the rule is always taken from rules.csv, never from this file.
+#
+#   rule        kind    layer     [in=<well layer>]
+#
+# kind:
+#   width   a single rectangle of the given width
+#   space   two rectangles at the given spacing
+#   area    a single rectangle of the given area
+#   hole    a ring around a square hole of the given area
+#
+# "in=" draws the test inside a large rectangle of that layer (pdiff
+# needs an nwell).  A rule may be listed more than once for different
+# layers; the test name then gets a "/layer" suffix.
+
+nwell.1     width   nwell
+nwell.2a    space   nwell
+
+difftap.1   width   ndiff
+difftap.1   width   pdiff     in=nwell
+difftap.3   space   ndiff
+difftap.3   space   pdiff     in=nwell
+
+poly.1a     width   poly
+poly.2      space   poly
+
+li.1        width   locali
+li.3        space   locali
+li.6        area    locali
+
+m1.1        width   metal1
+m1.2        space   metal1
+m1.6        area    metal1
+m1.7        hole    metal1
+
+m2.1        width   metal2
+m2.2        space   metal2
+m2.6        area    metal2
+m2.7        hole    metal2
+
+m3.1        width   metal3
+m3.2        space   metal3
+m3.6        area    metal3
+
+m4.1        width   metal4
+m4.2        space   metal4
+m4.4a       area    metal4
+
+m5.1        width   metal5
+m5.2        space   metal5
+m5.4        area    metal5
